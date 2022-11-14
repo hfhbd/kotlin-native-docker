@@ -1,13 +1,12 @@
 # Build
 ```sh
-./gradlew assemble -Pstatic=true
+./gradlew assemble
 ```
-## amd64
+## Enable buildx
 ```sh
-docker build --platform linux/amd64 -t kotlin-native-amd64 --build-arg nativeFolder=linuxX64 .
+docker buildx build use
 ```
-
-## arm64
+## Build multi arch 
 ```sh
-docker build --platform linux/arm64 -t kotlin-native-arm64 --build-arg nativeFolder=linuxArm64 .
+docker buildx build --platform linux/arm64,linux/amd64 -t kotlin-native .
 ```

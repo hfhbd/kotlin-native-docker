@@ -1,5 +1,5 @@
 FROM alpine
+ARG TARGETARCH
 RUN apk add gcompat
-ARG nativeFolder
-COPY build/bin/${nativeFolder}/releaseExecutable/kotlin-native.kexe .
+COPY build/bin/docker-${TARGETARCH}/releaseExecutable/kotlin-native.kexe .
 CMD ["./kotlin-native.kexe"]

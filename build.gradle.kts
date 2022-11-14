@@ -24,20 +24,23 @@ kotlin {
         config()
     }
 
-    val static: String? by project
-    val custom: Executable.() -> Unit = if (static == "true") {
-        {
-            linkerOpts("--as-needed", "--defsym=isnan=isnan")
-            freeCompilerArgs =
-                freeCompilerArgs + "-Xoverride-konan-properties=linkerGccFlags=-lgcc -lgcc_eh -lc"
-        }
-    } else {
-        {}
-    }
     linuxX64 {
-        config(custom)
+        config()
     }
     linuxArm64 {
-        config(custom)
+        config()
+    }
+
+    val staticAlpine: Executable.() -> Unit = {
+        linkerOpts("--as-needed", "--defsym=isnan=isnan")
+        freeCompilerArgs =
+            freeCompilerArgs + "-Xoverride-konan-properties=linkerGccFlags=-lgcc -lgcc_eh -lc"
+    }
+
+    linuxX64("docker-amd64") {
+        config(staticAlpine)
+    }
+    linuxArm64("docker-arm64") {
+        config(staticAlpine)
     }
 }
