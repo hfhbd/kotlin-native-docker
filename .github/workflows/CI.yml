@@ -24,8 +24,8 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
-      - run: ./gradlew assemble
-      - run: ./gradlew build
+      - run: ./gradlew assemble -PdockerOnly=true
+      - run: ./gradlew build -PdockerOnly=true
       - name: Build and push
         uses: docker/build-push-action@v3
         with:

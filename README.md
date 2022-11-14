@@ -1,6 +1,6 @@
 # Build
 ```sh
-./gradlew assemble
+./gradlew assemble -PdockerOnly=true
 ```
 ## Enable buildx
 ```sh

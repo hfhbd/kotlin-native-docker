@@ -17,30 +17,34 @@ kotlin {
             }
         }
     }
-    macosArm64 {
-        config()
-    }
-    macosX64 {
-        config()
-    }
 
-    linuxX64 {
-        config()
-    }
-    linuxArm64 {
-        config()
-    }
+    val dockerOnly: String by project
+    if (dockerOnly == "true") {
+        val staticAlpine: Executable.() -> Unit = {
+            linkerOpts("--as-needed", "--defsym=isnan=isnan")
+            freeCompilerArgs =
+                freeCompilerArgs + "-Xoverride-konan-properties=linkerGccFlags=-lgcc -lgcc_eh -lc"
+        }
 
-    val staticAlpine: Executable.() -> Unit = {
-        linkerOpts("--as-needed", "--defsym=isnan=isnan")
-        freeCompilerArgs =
-            freeCompilerArgs + "-Xoverride-konan-properties=linkerGccFlags=-lgcc -lgcc_eh -lc"
-    }
+        linuxX64("docker-amd64") {
+            config(staticAlpine)
+        }
+        linuxArm64("docker-arm64") {
+            config(staticAlpine)
+        }
+    } else {
+        macosArm64 {
+            config()
+        }
+        macosX64 {
+            config()
+        }
 
-    linuxX64("docker-amd64") {
-        config(staticAlpine)
-    }
-    linuxArm64("docker-arm64") {
-        config(staticAlpine)
+        linuxX64 {
+            config()
+        }
+        linuxArm64 {
+            config()
+        }
     }
 }
