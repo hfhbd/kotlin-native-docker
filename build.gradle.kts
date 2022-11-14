@@ -18,7 +18,7 @@ kotlin {
         }
     }
 
-    val dockerOnly: String by project
+    val dockerOnly: String? by project
     if (dockerOnly == "true") {
         val staticAlpine: Executable.() -> Unit = {
             linkerOpts("--as-needed", "--defsym=isnan=isnan")
