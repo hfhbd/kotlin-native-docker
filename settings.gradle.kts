@@ -1,1 +1,1 @@
-rootProject.name = "kotlin-native"
+rootProject.name = "kotlin-native-docker"
