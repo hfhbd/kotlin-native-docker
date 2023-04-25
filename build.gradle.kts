@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.*
 
 plugins {
-    kotlin("multiplatform") version "1.8.20"
+    kotlin("multiplatform") version "1.8.21"
 }
 
 repositories {
