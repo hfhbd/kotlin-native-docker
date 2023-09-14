@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker login ghcr.io -u ${{ github.actor }} -p ${{ github.token }}
-      - uses: docker/setup-buildx-action@v2
+      - uses: docker/setup-buildx-action@v3
       - uses: docker/setup-qemu-action@v3
       - uses: gradle/wrapper-validation-action@v1
       - uses: actions/setup-java@v3
